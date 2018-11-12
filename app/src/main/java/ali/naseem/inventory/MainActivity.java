@@ -11,8 +11,7 @@ import ali.naseem.inventory.db.InventoryContract.InventoryEntry;
 import ali.naseem.inventory.db.InventoryHelper;
 
 public class MainActivity extends AppCompatActivity {
-
-    private String TAG = "DATA";
+    
     private InventoryHelper helper;
 
     @Override
@@ -34,13 +33,13 @@ public class MainActivity extends AppCompatActivity {
         values.put(InventoryEntry.COLUMN_PRODUCT_SUPPLIER_PHONE, "7017416084");
         long newRowId = db.insert(InventoryEntry.TABLE_NAME, null, values);
         if (newRowId != -1) {
-            Log.d(TAG, "Row Inserted " + String.valueOf(newRowId));
+            Log.d(InventoryHelper.LOG_TAG, "Row Inserted " + String.valueOf(newRowId));
         } else {
-            Log.d(TAG, "Row Not Inserted " + String.valueOf(newRowId));
+            Log.d(InventoryHelper.LOG_TAG, "Row Not Inserted " + String.valueOf(newRowId));
         }
     }
 
-    private Cursor queryData() {
+    private void queryData() {
         SQLiteDatabase db = helper.getReadableDatabase();
         String[] projection = {
                 InventoryEntry._ID,
@@ -50,12 +49,12 @@ public class MainActivity extends AppCompatActivity {
                 InventoryEntry.COLUMN_PRODUCT_SUPPLIER_NAME,
                 InventoryEntry.COLUMN_PRODUCT_SUPPLIER_PHONE};
         Cursor cursor = db.query(
-                InventoryEntry.TABLE_NAME,   // The table to query
-                projection,            // The columns to return
-                null,                  // The columns for the WHERE clause
-                null,                  // The values for the WHERE clause
-                null,                  // Don't group the rows
-                null,                  // Don't filter by row groups
+                InventoryEntry.TABLE_NAME,
+                projection,
+                null,
+                null,
+                null,
+                null,
                 null);
         try {
             int idColumnIndex = cursor.getColumnIndex(InventoryEntry._ID);
@@ -71,11 +70,10 @@ public class MainActivity extends AppCompatActivity {
                 int quantity = cursor.getInt(quantityColumnIndex);
                 String supplierName = cursor.getString(supplierNameColumnIndex);
                 String supplierPhone = cursor.getString(supplierPhoneColumnIndex);
-                Log.d(TAG, String.format("%d %s %d %d %s %s", currentID, name, price, quantity, supplierName, supplierPhone));
+                Log.d(InventoryHelper.LOG_TAG, String.format("%d %s %d %d %s %s", currentID, name, price, quantity, supplierName, supplierPhone));
             }
         } finally {
             cursor.close();
         }
-        return cursor;
     }
 }
