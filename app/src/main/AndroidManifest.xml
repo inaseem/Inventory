@@ -16,6 +16,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".DetailActivity" />
+        <activity android:name=".EditorActivity"></activity>
+
+        <provider
+            android:name=".db.InventoryProvider"
+            android:authorities="ali.naseem.inventory"
+            android:exported="false" />
     </application>
 
 </manifest>
