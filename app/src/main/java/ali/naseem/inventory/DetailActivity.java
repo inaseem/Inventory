@@ -1,7 +1,9 @@
 package ali.naseem.inventory;
 
+import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
@@ -88,14 +90,7 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
             delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    int rowsDeleted = getContentResolver().delete(mCurrentInventoryUri, null, null);
-                    if (rowsDeleted == 0) {
-                        Toast.makeText(DetailActivity.this, "Delete Failed", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(DetailActivity.this, "Successfully Deleted", Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
-                    getLoaderManager().restartLoader(EXISTING_INVENTORY_LOADER, null, DetailActivity.this);
+                    confirmDelete();
                 }
             });
         }
@@ -118,5 +113,32 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
                 finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void confirmDelete() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Delete this item?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+                int rowsDeleted = getContentResolver().delete(mCurrentInventoryUri, null, null);
+                if (rowsDeleted == 0) {
+                    Toast.makeText(DetailActivity.this, "Delete Failed", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(DetailActivity.this, "Successfully Deleted", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+                getLoaderManager().restartLoader(EXISTING_INVENTORY_LOADER, null, DetailActivity.this);
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 }
