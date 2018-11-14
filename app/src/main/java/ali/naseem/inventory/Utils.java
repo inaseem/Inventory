@@ -71,6 +71,24 @@ public class Utils {
         return rowsAffected;
     }
 
+    public static int quantityIncreaseUpdate(Uri currentUri, Context context, int currentQuantity) {
+        int rowsAffected = 0;
+        if (currentQuantity > -1) {
+            currentQuantity += 1;
+            ContentValues values = new ContentValues();
+            values.put(COLUMN_PRODUCT_QUANTITY, currentQuantity);
+            rowsAffected = context.getContentResolver().update(currentUri, values, null, null);
+            if (rowsAffected == 0) {
+                Toast.makeText(context, context.getString(R.string.sale_update_item_failed), Toast.LENGTH_SHORT).show();
+            } else
+                Toast.makeText(context, R.string.sale_update_item_successful, Toast.LENGTH_SHORT).show();
+        } else {
+            rowsAffected = 0;
+            Toast.makeText(context, context.getString(R.string.editor_update_zero_item_failed), Toast.LENGTH_SHORT).show();
+        }
+        return rowsAffected;
+    }
+
     public static Cursor readItem(Context context) {
         InventoryHelper dbHelper = new InventoryHelper(context);
         SQLiteDatabase db = dbHelper.getReadableDatabase();

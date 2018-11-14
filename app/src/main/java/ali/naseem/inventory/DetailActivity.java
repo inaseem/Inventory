@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -32,6 +33,8 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
     private TextView supplierPhone;
     private Button contactSupplier;
     private Button delete;
+    private Button plusOne;
+    private Button minusOne;
     private Uri mCurrentInventoryUri;
     private static final int EXISTING_INVENTORY_LOADER = 1;
 
@@ -46,6 +49,8 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         supplierPhone = findViewById(R.id.supplier_phone);
         contactSupplier = findViewById(R.id.contactSupplier);
         delete = findViewById(R.id.delete);
+        plusOne = findViewById(R.id.plusOne);
+        minusOne = findViewById(R.id.minusOne);
         Intent intent = getIntent();
         mCurrentInventoryUri = intent.getData();
         getLoaderManager().initLoader(EXISTING_INVENTORY_LOADER, null, this);
@@ -91,6 +96,24 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
                 @Override
                 public void onClick(View view) {
                     confirmDelete();
+                }
+            });
+            plusOne.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int currentQuantity = Integer.parseInt(TextUtils.isEmpty(quantity.getText()) ? "0" : quantity.getText().toString());
+                    if (Utils.quantityIncreaseUpdate(mCurrentInventoryUri, DetailActivity.this, currentQuantity) != 0) {
+                        quantity.setText(String.valueOf(Integer.parseInt(quantity.getText().toString()) + 1));
+                    }
+                }
+            });
+            minusOne.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int currentQuantity = Integer.parseInt(TextUtils.isEmpty(quantity.getText()) ? "0" : quantity.getText().toString());
+                    if (Utils.quantityUpdate(mCurrentInventoryUri, DetailActivity.this, currentQuantity) != 0) {
+                        quantity.setText(String.valueOf(Integer.parseInt(quantity.getText().toString()) - 1));
+                    }
                 }
             });
         }

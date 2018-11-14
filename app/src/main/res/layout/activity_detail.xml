@@ -123,6 +123,7 @@
             android:id="@+id/contactSupplier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:backgroundTint="@color/colorAccent"
             android:text="@string/contact_supplier"
             android:textColor="@android:color/white" />
@@ -131,8 +132,40 @@
             android:id="@+id/delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:backgroundTint="@color/colorAccent"
             android:text="Delete"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:layout_weight="1"
+            android:text="Quantity ="
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/plusOne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorAccent"
+            android:text="+1"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/minusOne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorAccent"
+            android:text="-1"
             android:textColor="@android:color/white" />
     </LinearLayout>
 </LinearLayout>
