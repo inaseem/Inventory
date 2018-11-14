@@ -5,8 +5,14 @@
     <string name="editor_update_item_failed">Update Failed</string>
     <string name="editor_update_item_successful">Update Successfully</string>
     <string name="button_sale">Sale</string>
+    <string name="button_edit">Edit</string>
     <string name="sale_update_item_failed">Sale Update For The Item Has Failed</string>
     <string name="sale_update_item_successful">Sale Update For The Item Has Successfully Completed</string>
-    <string name="editor_update_zero_item_failed">Update Zero Item Failed</string>
+    <string name="editor_update_zero_item_failed">Product Is Already Out Of Stock</string>
     <string name="empty_text">Press + icon at the top right to insert data.</string>
+    <string name="supplier_name">Supplier Name</string>
+    <string name="supplier_phone">Supplier Phone Number</string>
+    <string name="product_quantity">Product Quantity</string>
+    <string name="product_price">Product Price</string>
+    <string name="product_name">Product Name</string>
 </resources>

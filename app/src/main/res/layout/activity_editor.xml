@@ -7,45 +7,96 @@
     android:padding="8dp"
     tools:context=".EditorActivity">
 
-    <EditText
-        android:id="@+id/name"
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:hint="Name" />
+        android:textColorHint="#C4C4C4">
 
-    <EditText
-        android:id="@+id/price"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:hint="Price" />
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/product_name"
+            android:textColor="#191926"
+            android:textColorHint="#C4C4C4"
+            android:textSize="18sp" />
+    </android.support.design.widget.TextInputLayout>
 
-    <EditText
-        android:id="@+id/quantity"
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:hint="Quantity" />
+        android:textColorHint="#C4C4C4">
 
-    <EditText
-        android:id="@+id/supplier_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:hint="Supplier Name" />
+        <EditText
+            android:id="@+id/price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/product_price"
+            android:inputType="number"
+            android:textColor="#191926"
+            android:textColorHint="#C4C4C4"
+            android:textSize="18sp" />
+    </android.support.design.widget.TextInputLayout>
 
-    <EditText
-        android:id="@+id/supplier_phone"
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:hint="Supplier Phone Number" />
+        android:textColorHint="#C4C4C4">
+
+        <EditText
+            android:id="@+id/quantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/product_quantity"
+            android:inputType="number"
+            android:textColor="#191926"
+            android:textColorHint="#C4C4C4"
+            android:textSize="18sp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:textColorHint="#C4C4C4">
+
+        <EditText
+            android:id="@+id/supplier_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/supplier_name"
+            android:textColor="#191926"
+            android:textColorHint="#C4C4C4"
+            android:textSize="18sp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:textColorHint="#C4C4C4">
+
+        <EditText
+            android:id="@+id/supplier_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/supplier_phone"
+            android:inputType="phone"
+            android:textColor="#191926"
+            android:textColorHint="#C4C4C4"
+            android:textSize="18sp" />
+    </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/save"
-        android:text="Save"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:backgroundTint="@color/colorAccent"
+        android:text="Save"
+        android:textColor="@android:color/white" />
 
 </LinearLayout>

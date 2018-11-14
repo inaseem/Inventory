@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="8dp"
+        android:clickable="true"
         android:divider="#e3e4e7"
         android:dividerHeight="8dp"
         android:drawSelectorOnTop="true"

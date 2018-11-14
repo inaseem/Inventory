@@ -8,7 +8,8 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.EditText;
+import android.view.MenuItem;
+import android.widget.TextView;
 
 import static ali.naseem.inventory.db.InventoryContract.InventoryEntry.COLUMN_PRODUCT_NAME;
 import static ali.naseem.inventory.db.InventoryContract.InventoryEntry.COLUMN_PRODUCT_PRICE;
@@ -19,11 +20,11 @@ import static ali.naseem.inventory.db.InventoryContract.InventoryEntry._ID;
 
 public class DetailActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    private EditText name;
-    private EditText price;
-    private EditText quantity;
-    private EditText supplierName;
-    private EditText supplierPhone;
+    private TextView name;
+    private TextView price;
+    private TextView quantity;
+    private TextView supplierName;
+    private TextView supplierPhone;
     private Uri mCurrentInventoryUri;
     private static final int EXISTING_INVENTORY_LOADER = 1;
 
@@ -39,6 +40,7 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         Intent intent = getIntent();
         mCurrentInventoryUri = intent.getData();
         getLoaderManager().initLoader(EXISTING_INVENTORY_LOADER, null, this);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -75,5 +77,14 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
