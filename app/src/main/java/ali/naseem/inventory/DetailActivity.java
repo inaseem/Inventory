@@ -9,7 +9,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import static ali.naseem.inventory.db.InventoryContract.InventoryEntry.COLUMN_PRODUCT_NAME;
 import static ali.naseem.inventory.db.InventoryContract.InventoryEntry.COLUMN_PRODUCT_PRICE;
@@ -25,6 +28,8 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
     private TextView quantity;
     private TextView supplierName;
     private TextView supplierPhone;
+    private Button contactSupplier;
+    private Button delete;
     private Uri mCurrentInventoryUri;
     private static final int EXISTING_INVENTORY_LOADER = 1;
 
@@ -37,6 +42,8 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         quantity = findViewById(R.id.quantity);
         supplierName = findViewById(R.id.supplier_name);
         supplierPhone = findViewById(R.id.supplier_phone);
+        contactSupplier = findViewById(R.id.contactSupplier);
+        delete = findViewById(R.id.delete);
         Intent intent = getIntent();
         mCurrentInventoryUri = intent.getData();
         getLoaderManager().initLoader(EXISTING_INVENTORY_LOADER, null, this);
@@ -64,19 +71,44 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
             int productQuantity = cursor.getInt(quantityColumnIndex);
             int productPrice = cursor.getInt(priceColumnIndex);
             String supplier_name = cursor.getString(supplierColumnIndex);
-            String phone = cursor.getString(phoneColumnIndex);
+            final String phone = cursor.getString(phoneColumnIndex);
             name.setText(productName);
             price.setText(String.valueOf(productPrice));
             quantity.setText(String.valueOf(productQuantity));
             supplierName.setText(supplier_name);
             supplierPhone.setText(phone);
+            contactSupplier.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(Intent.ACTION_DIAL);
+                    intent.setData(Uri.parse("tel:" + phone));
+                    startActivity(intent);
+                }
+            });
+            delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int rowsDeleted = getContentResolver().delete(mCurrentInventoryUri, null, null);
+                    if (rowsDeleted == 0) {
+                        Toast.makeText(DetailActivity.this, "Delete Failed", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(DetailActivity.this, "Successfully Deleted", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                    getLoaderManager().restartLoader(EXISTING_INVENTORY_LOADER, null, DetailActivity.this);
+                }
+            });
         }
-
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-
+        name.setText(null);
+        price.setText(String.valueOf(0));
+        quantity.setText(String.valueOf(0));
+        supplierPhone.setText(null);
+        supplierName.setText(null);
+        contactSupplier.setOnClickListener(null);
     }
 
     @Override

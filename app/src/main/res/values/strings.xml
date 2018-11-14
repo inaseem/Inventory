@@ -15,4 +15,7 @@
     <string name="product_quantity">Product Quantity</string>
     <string name="product_price">Product Price</string>
     <string name="product_name">Product Name</string>
+    <string name="contact_supplier">Contact Supplier</string>
+    <string name="details">Detail Activity</string>
+    <string name="edit_activity">Edit Activity</string>
 </resources>

@@ -112,4 +112,27 @@
             android:layout_weight="2"
             android:autoLink="phone" />
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/contactSupplier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorAccent"
+            android:text="@string/contact_supplier"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorAccent"
+            android:text="Delete"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
 </LinearLayout>

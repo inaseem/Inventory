@@ -19,7 +19,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import ali.naseem.inventory.adapters.InventoryCursorAdapter;
-import ali.naseem.inventory.db.InventoryHelper;
 
 import static ali.naseem.inventory.db.InventoryContract.InventoryEntry.COLUMN_PRODUCT_NAME;
 import static ali.naseem.inventory.db.InventoryContract.InventoryEntry.COLUMN_PRODUCT_PRICE;
@@ -31,7 +30,6 @@ import static ali.naseem.inventory.db.InventoryContract.InventoryEntry._ID;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    private InventoryHelper helper;
     private ListView listView;
     private InventoryCursorAdapter adapter;
     private TextView emptyView;
@@ -41,7 +39,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        helper = new InventoryHelper(this);
         listView = findViewById(R.id.listView);
         emptyView = findViewById(R.id.emptyView);
         adapter = new InventoryCursorAdapter(this, null);

@@ -20,7 +20,6 @@ import static ali.naseem.inventory.db.InventoryContract.InventoryEntry.TABLE_NAM
 import static ali.naseem.inventory.db.InventoryContract.InventoryEntry._ID;
 
 public class Utils {
-    private static final String LOG_TAG = Utils.class.getSimpleName();
 
     public static Uri insertProducts(Context mContext, String product, String price, String quantity, String supplier, String phone) {
         ContentValues values = new ContentValues();
@@ -52,7 +51,6 @@ public class Utils {
         } else
             Toast.makeText(mContext, R.string.editor_update_item_successful, Toast.LENGTH_SHORT).show();
         return rowsAffected;
-
     }
 
     public static int quantityUpdate(Uri currentUri, Context context, int currentQuantity) {
@@ -76,26 +74,8 @@ public class Utils {
     public static Cursor readItem(Context context) {
         InventoryHelper dbHelper = new InventoryHelper(context);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-
         String projection[] = {_ID, COLUMN_PRODUCT_NAME, COLUMN_PRODUCT_PRICE, COLUMN_PRODUCT_QUANTITY, COLUMN_PRODUCT_SUPPLIER_NAME, COLUMN_PRODUCT_SUPPLIER_PHONE
         };
         return db.query(TABLE_NAME, projection, null, null, null, null, null);
     }
-
-//    private static String getDataColumn(Context context, Uri uri, String selection, String[] selectionArgs) {
-//        Cursor cursor = null;
-//        final String column = "_data";
-//        final String[] projection = {column};
-//        try {
-//            cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs, null);
-//            if (cursor != null && cursor.moveToFirst()) {
-//                final int column_index = cursor.getColumnIndexOrThrow(column);
-//                return cursor.getString(column_index);
-//            }
-//        } finally {
-//            if (cursor != null) cursor.close();
-//        }
-//        return null;
-//    }
-
 }

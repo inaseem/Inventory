@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -63,19 +62,15 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                     if (mCurrentInventoryUri == null) {
                         Uri ID = Utils.insertProducts(getApplicationContext(), name.getText().toString().trim(), price.getText().toString().trim(), quantity.getText().toString().trim(), supplierName.getText().toString().trim(), supplierPhone.getText().toString().trim());
                         if (ID != null) {
-//                            clearEditText();
                             finish();
                         }
                     } else {
                         int rowsAffected = Utils.updateProducts(mCurrentInventoryUri, getApplicationContext(), name.getText().toString().trim(), price.getText().toString().trim(), quantity.getText().toString().trim(), supplierName.getText().toString().trim(), supplierPhone.getText().toString().trim());
                         if (rowsAffected != 0) {
-//                            clearEditText();
                             finish();
                         }
 
                     }
-                    Log.d("Text", "Et: " + name.getText().toString());
-
                 } else {
                     Toast.makeText(EditorActivity.this, "Please Enter Correct Data Values", Toast.LENGTH_SHORT).show();
                 }
@@ -111,12 +106,15 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             supplierName.setText(supplier_name);
             supplierPhone.setText(phone);
         }
-
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-
+        price.setText(String.valueOf(0));
+        quantity.setText(String.valueOf(0));
+        name.setText(null);
+        supplierPhone.setText(null);
+        supplierName.setText(null);
     }
 
     @Override
